@@ -188,15 +188,6 @@
         type="button"
         role="tab"
         aria-selected="true"
-        data-game-id="reinarte"
-      >
-        Reinarte Cards
-      </button>
-      <button
-        class="switcher-btn"
-        type="button"
-        role="tab"
-        aria-selected="false"
         data-game-id="gdhearts"
       >
         Hearts (GD)
@@ -207,7 +198,7 @@
 
     <div class="ad-slot ad-top">Advertisement</div>
 
-    <p class="lead" id="gameNote">Default: Reinarte Cards (Hearts-style trick-taking). You can switch versions above.</p>
+    <p class="lead" id="gameNote">Now playing Hearts (GD).</p>
 
     <div class="layout">
       <div class="ad-slot ad-left">Advertisement</div>
@@ -325,12 +316,6 @@
   <script>
     const gameConfigs = [
       {
-        id: "reinarte",
-        label: "Reinarte Cards",
-        note: "Default: Reinarte Cards (Hearts-style trick-taking). You can switch versions above.",
-        baseUrl: "https://html5.gamedistribution.com/ab33078c48e64b91a5942a293732c276/",
-      },
-      {
         id: "gdhearts",
         label: "Hearts (GD)",
         note: "Now playing Hearts (GD). You can switch versions above.",
@@ -358,7 +343,8 @@
       frameContainer.innerHTML = "";
       const iframe = document.createElement("iframe");
       iframe.className = "game-frame";
-      iframe.src = `${baseUrl}?gd_sdk_referrer_url=${encodeURIComponent(window.location.href)}`;
+      const canonical = window.location.origin + window.location.pathname;
+      iframe.src = `${baseUrl}?gd_sdk_referrer_url=${encodeURIComponent(canonical)}`;
       iframe.title = "Play Hearts Online Free";
       iframe.loading = "lazy";
       iframe.allowFullscreen = true;
