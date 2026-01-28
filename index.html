@@ -328,13 +328,13 @@
         id: "reinarte",
         label: "Reinarte Cards",
         note: "Default: Reinarte Cards (Hearts-style trick-taking). You can switch versions above.",
-        url: "https://html5.gamedistribution.com/ab33078c48e64b91a5942a293732c276/?gd_sdk_referrer_url=https://gamedistribution.com/games/reinarte-cards/",
+        baseUrl: "https://html5.gamedistribution.com/ab33078c48e64b91a5942a293732c276/",
       },
       {
         id: "gdhearts",
         label: "Hearts (GD)",
         note: "Now playing Hearts (GD). You can switch versions above.",
-        url: "https://html5.gamedistribution.com/fec9c0500a0f4bda8021c1da4fcfe1e7/?gd_sdk_referrer_url=https://gamedistribution.com/games/hearts/",
+        baseUrl: "https://html5.gamedistribution.com/fec9c0500a0f4bda8021c1da4fcfe1e7/",
       },
     ];
 
@@ -351,14 +351,14 @@
       });
     };
 
-    const createIframe = (url) => {
+    const createIframe = (baseUrl) => {
       if (!frameContainer) {
         return;
       }
       frameContainer.innerHTML = "";
       const iframe = document.createElement("iframe");
       iframe.className = "game-frame";
-      iframe.src = url;
+      iframe.src = `${baseUrl}?gd_sdk_referrer_url=${encodeURIComponent(window.location.href)}`;
       iframe.title = "Play Hearts Online Free";
       iframe.loading = "lazy";
       iframe.allowFullscreen = true;
@@ -372,7 +372,7 @@
       if (gameNote) {
         gameNote.textContent = game.note || "You can switch versions above.";
       }
-      createIframe(game.url);
+      createIframe(game.baseUrl);
     };
 
     switcherButtons.forEach((button) => {
@@ -402,12 +402,17 @@
     Advertisements displayed on this site are provided by third-party ad networks.
   </div>
   <script>
-    setTimeout(function () {
-      var s = document.createElement('script');
-      s.dataset.zone = '10531957';
-      s.src = 'https://gizokraijaw.net/vignette.min.js';
-      document.body.appendChild(s);
-    }, 5000);
+  (function () {
+    if (!("serviceWorker" in navigator)) return;
+    navigator.serviceWorker.getRegistrations().then(function (regs) {
+      regs.forEach(function (r) { r.unregister(); });
+    });
+    if (window.caches && caches.keys) {
+      caches.keys().then(function (keys) {
+        keys.forEach(function (k) { caches.delete(k); });
+      });
+    }
+  })();
   </script>
 </body>
 </html>
