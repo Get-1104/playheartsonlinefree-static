@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QQ789DDCHJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QQ789DDCHJ');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Play Hearts Online Free</title>
@@ -58,7 +66,7 @@
       display: flex;
       justify-content: center;
       gap: 12px;
-      margin: 10px auto 16px;
+      margin: 6px auto 10px;
       flex-wrap: wrap;
     }
 
@@ -71,6 +79,10 @@
       font-size: 0.95rem;
       cursor: pointer;
       transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .switcher-btn.active {
@@ -99,7 +111,7 @@
       gap: 16px;
       grid-template-columns: minmax(160px, 220px) minmax(0, 1fr) minmax(160px, 220px);
       align-items: start;
-      margin: 20px 0 40px;
+      margin: 8px 0 32px;
     }
 
     .ad-left,
@@ -115,7 +127,7 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
     }
 
-    #gameFrameContainer {
+    #game {
       min-height: 720px;
     }
 
@@ -169,7 +181,7 @@
         height: min(70vh, 640px);
       }
 
-      #gameFrameContainer {
+      #game {
         min-height: min(70vh, 640px);
       }
     }
@@ -183,37 +195,38 @@
 
   <main>
     <div class="game-switcher" role="tablist" aria-label="Game Switcher">
-      <button
+      <a
         class="switcher-btn active"
-        type="button"
         role="tab"
         aria-selected="true"
-        data-game-id="reinarte"
-      >
-        Reinarte Cards
-      </button>
-      <button
-        class="switcher-btn"
-        type="button"
-        role="tab"
-        aria-selected="false"
-        data-game-id="gdhearts"
+        href="index.html"
       >
         Hearts (GD)
-      </button>
+      </a>
+      <a
+        class="switcher-btn"
+        role="tab"
+        aria-selected="false"
+        href="reinarte-cards/index.html"
+      >
+        Reinarte Cards
+      </a>
     </div>
 
-    <p class="lead">Tip: Only one game loads at a time for speed and stability.</p>
-
     <div class="ad-slot ad-top">Advertisement</div>
-
-    <p class="lead" id="gameNote">Default: Reinarte Cards (Hearts-style trick-taking). You can switch versions above.</p>
 
     <div class="layout">
       <div class="ad-slot ad-left">Advertisement</div>
 
-      <div class="game-wrapper" aria-label="Hearts game iframe">
-        <div id="gameFrameContainer"></div>
+      <div id="game" class="game-wrapper" aria-label="Hearts game iframe">
+        <iframe
+          id="gdFrame"
+          class="game-frame"
+          title="Play Hearts Online Free"
+          loading="lazy"
+          allowfullscreen
+          data-base-url="https://html5.gamedistribution.com/fec9c0500a0f4bda8021c1da4fcfe1e7/"
+        ></iframe>
       </div>
 
       <div class="ad-slot ad-right">Advertisement</div>
@@ -252,11 +265,11 @@
         </div>
         <div class="faq-item">
           <strong>Can I switch between different Hearts games?</strong>
-          <p>Yes. Use the game switcher above to pick the version you prefer. Only one game loads at a time for better performance.</p>
+          <p>Yes. Use the tabs above to open the version you prefer on its own page. Only one game loads at a time for better performance.</p>
         </div>
         <div class="faq-item">
           <strong>Which version is loaded by default?</strong>
-          <p>The page loads Reinarte Cards by default. You can switch to Hearts (GD) using the tabs.</p>
+          <p>This page loads Hearts (GD). Reinarte Cards is available on its own page from the tabs.</p>
         </div>
       </div>
     </section>
@@ -308,7 +321,7 @@
           "name": "Which version is loaded by default?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The page loads Reinarte Cards by default. You can switch to Hearts (GD) using the tabs."
+            "text": "This page loads Hearts (GD). Reinarte Cards is available on its own page from the tabs."
           }
         },
         {
@@ -316,84 +329,21 @@
           "name": "Can I switch between different Hearts games?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Use the game switcher above to pick the version you prefer. Only one game loads at a time for better performance."
+            "text": "Yes. Use the tabs above to open the version you prefer on its own page. Only one game loads at a time for better performance."
           }
         }
       ]
     }
   </script>
   <script>
-    const gameConfigs = [
-      {
-        id: "reinarte",
-        label: "Reinarte Cards",
-        note: "Default: Reinarte Cards (Hearts-style trick-taking). You can switch versions above.",
-        baseUrl: "https://html5.gamedistribution.com/ab33078c48e64b91a5942a293732c276/",
-      },
-      {
-        id: "gdhearts",
-        label: "Hearts (GD)",
-        note: "Now playing Hearts (GD). You can switch versions above.",
-        baseUrl: "https://html5.gamedistribution.com/fec9c0500a0f4bda8021c1da4fcfe1e7/",
-      },
-    ];
-
-    const storageKey = "hearts_game";
-    const frameContainer = document.getElementById("gameFrameContainer");
-    const switcherButtons = document.querySelectorAll(".switcher-btn");
-    const gameNote = document.getElementById("gameNote");
-
-    const updateActiveTab = (id) => {
-      switcherButtons.forEach((btn) => {
-        const isActive = btn.getAttribute("data-game-id") === id;
-        btn.classList.toggle("active", isActive);
-        btn.setAttribute("aria-selected", isActive ? "true" : "false");
-      });
-    };
-
-    const createIframe = (baseUrl) => {
-      if (!frameContainer) {
-        return;
+    (function () {
+      const frame = document.getElementById("gdFrame");
+      if (frame) {
+        const baseUrl = frame.getAttribute("data-base-url");
+        frame.src = `${baseUrl}?gd_sdk_referrer_url=${encodeURIComponent(window.location.href)}`;
       }
-      frameContainer.innerHTML = "";
-      const iframe = document.createElement("iframe");
-      iframe.className = "game-frame";
-      iframe.src = `${baseUrl}?gd_sdk_referrer_url=${encodeURIComponent(window.location.href)}`;
-      iframe.title = "Play Hearts Online Free";
-      iframe.loading = "lazy";
-      iframe.allowFullscreen = true;
-      frameContainer.appendChild(iframe);
-    };
 
-    const selectGame = (id) => {
-      const game = gameConfigs.find((item) => item.id === id) || gameConfigs[0];
-      updateActiveTab(game.id);
-      localStorage.setItem(storageKey, game.id);
-      if (gameNote) {
-        gameNote.textContent = game.note || "You can switch versions above.";
-      }
-      createIframe(game.baseUrl);
-    };
-
-    switcherButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const id = button.getAttribute("data-game-id");
-        if (!id) {
-          return;
-        }
-        selectGame(id);
-      });
-    });
-
-    const hashId = window.location.hash.replace("#", "");
-    const storedId = localStorage.getItem(storageKey);
-    const preferredId = gameConfigs.some((item) => item.id === hashId)
-      ? hashId
-      : gameConfigs.some((item) => item.id === storedId)
-        ? storedId
-        : gameConfigs[0].id;
-
-    selectGame(preferredId);
+    })();
   </script>
   <div class="disclaimer" style="font-size:12px;color:#666;text-align:center;margin:20px 0;">
     Disclaimer: This website provides free online games for entertainment purposes only.
