@@ -13,222 +13,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Play Hearts Online Free</title>
   <meta name="description" content="Play Hearts Online Free instantly in your browser. Enjoy a fast, full-screen Hearts experience with clear rules, tips, and a clean, mobile-friendly layout." />
-  <style>
-    :root {
-      --bg: #0b1020;
-      --panel: #111827;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --accent: #38bdf8;
-      --border: #1f2937;
-      --ad-bg: #0b1220;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      background: radial-gradient(1200px 600px at 20% -10%, #1e293b 0%, #0f172a 50%, #0b1020 100%);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    header,
-    main,
-    footer,
-    section {
-      width: min(1400px, 100%);
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    header {
-      padding-top: 40px;
-      padding-bottom: 20px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: clamp(1.9rem, 2.6vw, 2.7rem);
-      margin: 0 0 10px;
-    }
-
-    .lead {
-      color: var(--muted);
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .game-switcher {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin: 6px auto 10px;
-      flex-wrap: wrap;
-    }
-
-    .switcher-btn {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .switcher-btn.active {
-      background: var(--accent);
-      color: #081018;
-      border-color: transparent;
-    }
-
-    .game-wrapper {
-      margin: 10px auto 34px;
-
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-    }
-
-    .game-frame {
-  width: 100%;
-  height: min(86vh, 900px);
-  min-height: 680px;
-  border: 0;
-  display: block;
-  background: #0b1020;
-}
-
-h2 {
-      margin: 40px 0 12px;
-      font-size: clamp(1.3rem, 2vw, 1.8rem);
-    }
-
-    .content-block {
-      background: rgba(17, 24, 39, 0.6);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .faq-item + .faq-item {
-      margin-top: 16px;
-    }
-
-    footer {
-      padding: 30px 20px 50px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 1024px) {
-      .ad-top {
-        min-height: 60px;
-      }
-
-      .game-frame {
-  width: 100%;
-  height: min(86vh, 900px);
-  min-height: 680px;
-  border: 0;
-  display: block;
-  background: #0b1020;
-}
-
-}
-  </style>
+  <link rel="stylesheet" href="/site.css" />
 </head>
 <body>
-  <header>
-    <h1>Play Hearts Online Free</h1>
-    <p class="lead">Play Hearts Online Free with a crisp, modern layout and an instant in-browser game experience. Learn the rules below, then jump right into a match.</p>
-  </header>
-
-  <main>
-    <div class="game-switcher" role="tablist" aria-label="Game Switcher">
-      <a
-        class="switcher-btn active"
-        role="tab"
-        aria-selected="true"
-        href="index.html"
-      >
-        Hearts
-      </a></div>
-
-<div id="game" class="game-wrapper" aria-label="Hearts game iframe">
-        <iframe
-          id="gdFrame"
-          class="game-frame"
-          title="Play Hearts Online Free"
-          src="games/hearts/index.html"
-          width="960"
-          height="540"
-          scrolling="no"
-          frameborder="0"
-          loading="lazy"
-          allowfullscreen
-        ></iframe>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span class="dot"></span>Play Hearts Online Free</div>
+      <div class="nav">
+        <a class="pill" href="/rules.html">Rules</a>
+        <a class="pill" href="/about.html">About</a>
       </div>
+    </div>
+  </div>
 
-    <section aria-labelledby="how-to-play">
+  <main class="main">
+    <section class="hero">
+      <h1>Play Hearts Online Free</h1>
+      <p>Fast in-browser Hearts with clean UI. Learn the rules, then jump straight into a match.</p>
+    </section>
+
+    <section class="game-shell">
+      <div class="game-frame" id="gameFrame">
+        <div id="game" class="game-wrapper" aria-label="Hearts game iframe">
+          <iframe
+            id="gdFrame"
+            class="game-embed"
+            title="Play Hearts Online Free"
+            src="games/hearts/index.html"
+            width="960"
+            height="540"
+            scrolling="no"
+            frameborder="0"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-section" aria-labelledby="how-to-play">
       <h2 id="how-to-play">How to Play Hearts</h2>
-      <div class="content-block">
-        <p>Hearts is a trick-taking card game where you want to avoid penalty cards. Each round begins with a card pass, then players follow suit and win tricks based on the highest card in the lead suit. Hearts are worth 1 point each, and the Queen of Spades is worth 13 points. The player with the lowest total score wins.</p>
-        <ul>
-          <li>Follow suit if possible; otherwise, play any card.</li>
-          <li>Hearts cannot be led until they are broken.</li>
-          <li>Shooting the moon gives all points to your opponents.</li>
-        </ul>
-      </div>
+      <p>Hearts is a trick-taking card game where you want to avoid penalty cards. Each round begins with a card pass, then players follow suit and win tricks based on the highest card in the lead suit. Hearts are worth 1 point each, and the Queen of Spades is worth 13 points. The player with the lowest total score wins.</p>
+      <ul>
+        <li>Follow suit if possible; otherwise, play any card.</li>
+        <li>Hearts cannot be led until they are broken.</li>
+        <li>Shooting the moon gives all points to your opponents.</li>
+      </ul>
     </section>
 
-    <section aria-labelledby="faq">
+    <section class="info-section" aria-labelledby="faq">
       <h2 id="faq">FAQ</h2>
-      <div class="content-block">
-        <div class="faq-item">
-          <strong>Can I play Hearts online for free?</strong>
-          <p>Yes. This page lets you play Hearts directly in your browser with no downloads.</p>
-        </div>
-        <div class="faq-item">
-          <strong>What is shooting the moon?</strong>
-          <p>If you take every heart and the Queen of Spades in one round, your score is 0 and everyone else receives 26 points.</p>
-        </div>
-        <div class="faq-item">
-          <strong>Do I need to create an account?</strong>
-          <p>No account is required. Just load the game above and start playing.</p>
-        </div>
-        <div class="faq-item">
-          <strong>Why don’t I see side ads on mobile?</strong>
-          <p>Side ads are hidden on smaller screens to keep the game area clear and readable.</p>
-        </div>
-        <div class="faq-item">
-          <strong>Can I switch between different Hearts games?</strong>
-          <p>Yes. Use the tabs above to open the version you prefer on its own page. Only one game loads at a time for better performance.</p>
-        </div>
-        <div class="faq-item">
-          <strong>Which version is loaded by default?</strong>
-          <p>This page loads Hearts. Reinarte Cards is available on its own page from the tabs.</p>
-        </div>
+      <div>
+        <strong>Can I play Hearts online for free?</strong>
+        <p>Yes. This page lets you play Hearts directly in your browser with no downloads.</p>
+      </div>
+      <div>
+        <strong>What is shooting the moon?</strong>
+        <p>If you take every heart and the Queen of Spades in one round, your score is 0 and everyone else receives 26 points.</p>
+      </div>
+      <div>
+        <strong>Do I need to create an account?</strong>
+        <p>No account is required. Just load the game above and start playing.</p>
+      </div>
+      <div>
+        <strong>Why don’t I see side ads on mobile?</strong>
+        <p>Side ads are hidden on smaller screens to keep the game area clear and readable.</p>
+      </div>
+      <div>
+        <strong>Can I switch between different Hearts games?</strong>
+        <p>Yes. Use the tabs above to open the version you prefer on its own page. Only one game loads at a time for better performance.</p>
+      </div>
+      <div>
+        <strong>Which version is loaded by default?</strong>
+        <p>This page loads Hearts. Reinarte Cards is available on its own page from the tabs.</p>
       </div>
     </section>
-  </main>
 
-  <footer>
-    <p>© 2026 Play Hearts Online Free. All rights reserved.</p>
-  </footer>
+    <div class="footer">
+      <div>© playheartsonlinefree.com</div>
+      <div><a class="pill" style="padding:6px 10px" href="/sitemap.xml">Sitemap</a></div>
+    </div>
+  </main>
 
   <script type="application/ld+json">
     {
@@ -292,6 +157,14 @@ h2 {
     We do not guarantee uninterrupted access or error-free gameplay.
     Advertisements displayed on this site are provided by third-party ad networks.
   </div>
+  <!-- Internal Links (SEO Required) -->
+  <section style="max-width:960px;margin:40px auto;font-family:sans-serif;">
+    <h2>Game Information</h2>
+    <ul>
+      <li><a href="/rules.html">Hearts Card Game Rules</a></li>
+      <li><a href="/about.html">About Play Hearts Online Free</a></li>
+    </ul>
+  </section>
   <script>
   (function () {
     if (!("serviceWorker" in navigator)) return;
@@ -305,5 +178,22 @@ h2 {
     }
   })();
   </script>
+  <!-- IndieDB Embed Button -->
+  <div style="text-align:center;margin:24px 0;">
+    <a href="https://www.indiedb.com/games/play-hearts-online-free"
+       target="_blank"
+       rel="noopener"
+       style="
+         display:inline-block;
+         padding:10px 16px;
+         background:#1b8f3a;
+         color:#ffffff;
+         border-radius:6px;
+         text-decoration:none;
+         font-weight:600;
+       ">
+      🎮 View on IndieDB
+    </a>
+  </div>
 </body>
 </html>

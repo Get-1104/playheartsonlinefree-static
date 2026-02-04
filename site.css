@@ -1,0 +1,168 @@
+/* ===== site.css ===== */
+:root{
+  --bg0:#071612;
+  --bg1:#0b241c;
+  --card:rgba(10,34,26,.72);
+  --card2:rgba(10,34,26,.55);
+  --border:rgba(120,255,200,.14);
+  --text:#e9fff6;
+  --muted:rgba(233,255,246,.72);
+  --accent:#41d39e;
+  --accent2:#2bb6ff;
+  --shadow:0 18px 60px rgba(0,0,0,.35);
+  --radius:28px;
+
+  /* 关键：游戏最大宽/高策略 */
+  --game-max:1600px;
+  --game-w:96vw;
+  --game-h:84vh;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%; scroll-behavior:smooth;}
+body{
+  margin:0;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 700px at 50% -10%, rgba(65,211,158,.22), transparent 65%),
+    radial-gradient(900px 600px at 15% 10%, rgba(43,182,255,.14), transparent 70%),
+    linear-gradient(180deg,var(--bg0),var(--bg1));
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei";
+}
+
+a{color:inherit}
+
+/* 顶部条：更紧凑，减少占高 */
+.topbar{
+  position:sticky; top:0; z-index:20;
+  padding:14px 18px;
+  background:rgba(6,18,14,.78);
+  border-bottom:1px solid var(--border);
+}
+.topbar-inner{
+  max-width: min(1200px, 96vw);
+  margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+.dot{width:9px;height:9px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 6px rgba(65,211,158,.12)}
+.nav{display:flex;gap:10px;flex-wrap:wrap}
+.pill{
+  appearance:none; border:1px solid var(--border);
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  padding:10px 14px; border-radius:999px;
+  text-decoration:none; font-weight:650;
+}
+.pill:hover{border-color:rgba(120,255,200,.28)}
+.pill.primary{
+  background:linear-gradient(180deg, rgba(65,211,158,.22), rgba(65,211,158,.10));
+  border-color:rgba(65,211,158,.35);
+}
+
+/* 主体：Hero 更短 + 游戏更大 */
+.main{
+  padding:22px 0 46px;
+}
+.hero{
+  max-width: min(1200px, 96vw);
+  margin: 0 auto 14px;
+  padding: 6px 18px;
+  text-align:center;
+}
+.hero h1{
+  margin: 10px 0 8px;
+  font-size: clamp(34px, 4vw, 56px);
+  letter-spacing:.3px;
+}
+.hero p{
+  margin: 0 auto;
+  max-width: 60ch;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* 游戏卡片：宽 96vw，上限 1600；高 84vh（首屏大头） */
+.game-shell{
+  width: min(var(--game-max), var(--game-w));
+  margin: 16px auto 0;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(10,34,26,.62), rgba(10,34,26,.40));
+  box-shadow: var(--shadow);
+  padding: 14px;
+}
+.game-frame{
+  width: 100%;
+  height: min(980px, var(--game-h));
+  border-radius: calc(var(--radius) - 10px);
+  overflow:hidden;
+  border: 1px solid rgba(120,255,200,.12);
+  background: rgba(0,0,0,.25);
+  display:flex;
+  align-items:stretch;
+  justify-content:stretch;
+}
+
+/* 兼容三种嵌入：iframe / canvas / div#game */
+.game-frame iframe,
+.game-frame canvas,
+.game-frame #game,
+.game-frame #gameRoot,
+.game-frame #app,
+.game-frame .game,
+.game-frame .game-container{
+  width:100% !important;
+  height:100% !important;
+  display:block;
+}
+
+/* 如果游戏内部是固定尺寸，给一个可选缩放钩子（不破坏已有布局） */
+.scale-fit{
+  transform-origin: top center;
+}
+
+/* 内容区域（规则/关于/FAQ） */
+.info-section{
+  max-width: min(1200px, 96vw);
+  margin: 26px auto 0;
+  padding: 0 18px;
+}
+
+.info-section h2{
+  margin: 18px 0 8px;
+  font-size: 20px;
+  letter-spacing:.2px;
+}
+
+.info-section ul{
+  margin: 8px 0 0 18px;
+  padding: 0;
+}
+
+.info-section li{
+  margin: 6px 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.mono{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* 底部信息 */
+.footer{
+  max-width: min(1200px, 96vw);
+  margin: 18px auto 0;
+  padding: 0 18px;
+  color: rgba(233,255,246,.55);
+  font-size: 13px;
+  display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+}
+
+/* 移动端：高度略降，避免被地址栏顶掉 */
+@media (max-width: 680px){
+  :root{ --game-w: 96vw; --game-h: 76vh; }
+  .hero{padding: 0 14px}
+  .hero p{max-width: 46ch}
+}
